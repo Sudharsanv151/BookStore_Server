@@ -155,11 +155,17 @@ router.get('/getcart/:userid',async(req,res) => {
 })
 
 
-
-
-
-
-
-
+router.put('/address/:userid', async (req,res) =>{
+    try {
+        const{userid} = req.params;
+        const address = req.body;
+        const user = await users.findById(userid);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        
+    }
+})
 
 module.exports = router
