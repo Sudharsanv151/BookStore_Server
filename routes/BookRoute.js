@@ -1,11 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const Books = require('../models/BookModel')
+const auth = require('../middleware/auth')
 
 
-
-
-router.get('/',async(req,res) => {
+router.get('/',auth,async(req,res) => {
     try{
         const fetchedbooks = await Books.find()
         res.status(200).json(fetchedbooks)
@@ -31,7 +30,7 @@ router.post('/add',async(req,res) => {
 })
 
 
-router.put('/edit/:id',async(req,res) => {
+router.put('/edit/:id', async(req,res) => {
     try {
         const id = req.params.id;
         const currentrecord = await Books.findById(id)
@@ -54,14 +53,11 @@ router.delete('/delete/:id',async(req,res) => {
             return res.status(404).json({message:"Book not found !"})
         }
         const deleteBook = await Books.findByIdAndDelete(id)
-        res.status(200).json({message:"Book deleted"})
+        res.status(200).json({message:"Book deleted", deleteBook})
     } catch (error) {
         res.status(500).json(error)
     }
 })
-
-
-
 
 
 module.exports = router

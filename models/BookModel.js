@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 
-
 const bookSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -19,7 +18,7 @@ const bookSchema = new mongoose.Schema({
         required: true
     },
     imageUrl: {
-        type: String,  // This will typically store a URL or file path to the image
+        type: String,  
         required: true
     },
     overview:{
@@ -39,7 +38,6 @@ const bookSchema = new mongoose.Schema({
         required:true
     }
 });
-
 
 
 const Books = mongoose.model("Books",bookSchema)
